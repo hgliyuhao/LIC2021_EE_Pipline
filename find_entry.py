@@ -255,20 +255,14 @@ def find_relation_for_submit(text,s_entries, o_entries):
 
             if '@value' in new['object']:
                     res['spo_list'].append(new)            
-            # res['spo_list'].append(new)
 
     return res
 
 res = fa.read_json('entry_pointer.json')
-# res = fa.read_json('entries.json')
 
 final_res = []
 
 for i in res:
-
-    # text = i['text']
-    # s_entries = i['s_entries']
-    # o_entries = i['o_entries']
 
     text = i[0]
     s_entries = []

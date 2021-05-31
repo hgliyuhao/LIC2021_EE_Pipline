@@ -140,7 +140,6 @@ for i in range(len(a)):
 
 id2label,label2id = fa.label2id(c)
 label_nums = len(c)
-# keras_version == 0.10.0
 
 maxlen = 256
 batch_size = 16
@@ -149,8 +148,6 @@ def read_data(filename):
 
     train_data = fa.read_json(filename)
 
-    # train_data = train_data[:5]
-    # entry_data = fa.read_json('entries.json')
     res = []
     for i in train_data:
         text = i['text']
@@ -177,9 +174,6 @@ def read_data(filename):
                     subjectList.append([spo['subject'],spo['subject_type']])
                 if [spo['object'][obj],spo['object_type'][obj]] not in objectList:
                     objectList.append([spo['object'][obj],spo['object_type'][obj]])
-
-        # subjectList = list(set(subjectList))
-        # objectList = list(set(objectList))
 
         for i in subjectList:
             for j in objectList:
@@ -381,106 +375,5 @@ model.fit_generator(
     callbacks=[evaluator]
 )
 
-# model.load_weights('best_model.weights')
 
-# test = fa.read_json('entry_baidu.json')
-
-# predict_data = []
-# predict_data_type = []
-
-# for t in test:
-#     text = t['text']
-#     s = t['s_entries']
-#     o = t['o_entries']
-#     # res.append([text,[i[0],i[1]],i[2]])
-#     # 拼接实体的方式[文本，[主体，客体]，0]
-#     for i in s:
-#         for j in o:
-#             i[1] = i[1][(i[1].find('_')+1):]
-#             j[1] = j[1][(j[1].find('_')+1):]
-
-#             predict_data.append([text,[i[0],j[0],i[1],j[1]],0])
-#             # predict_data_type.append([i[1],j[1]])
-
-# predict_generator = data_generator(predict_data, 256)
-# res = predict(predict_generator)
-# final_res = []
-
-# for i in range(len(predict_data)):
-
-#     final_res.append([predict_data[i][0],predict_data[i][1],id2label[res[i]]])
-
-# fa.write_json('baidu_res.json',final_res)    
-
-
-# test = fa.read_json('entry_pointer.json')
-
-# predict_data = []
-# predict_data_type = []
-
-# for t in tqdm(test):
-#     text = t[0]
-#     entries = t[1]
-
-#     s = []
-#     o = []
-
-#     for e in entries:
-#         if 's' in e[1]:
-#             s.append(e)
-#         else:
-#             o.append(e)
-
-#     for i in s:
-#         for j in o:
-#             i[1] = i[1][(i[1].find('_')+1):]
-#             j[1] = j[1][(j[1].find('_')+1):]
-
-#             predict_data.append([text,[i[0],j[0],i[1],j[1]],0])
-#             # predict_data_type.append([i[1],j[1]])
-
-# predict_generator = data_generator(predict_data, 256)
-# res = predict(predict_generator)
-# final_res = []
-
-# for i in range(len(predict_data)):
-
-#     final_res.append([predict_data[i][0],predict_data[i][1],id2label[res[i]]])
-
-# fa.write_json('entry_pointer_res.json',final_res) 
-
-# test = fa.read_json('entry_pointer_ad.json')
-
-# predict_data = []
-# predict_data_type = []
-
-# for t in tqdm(test):
-#     text = t[0]
-#     entries = t[1]
-
-#     s = []
-#     o = []
-
-#     for e in entries:
-#         if 's' in e[1]:
-#             s.append(e)
-#         else:
-#             o.append(e)
-
-#     for i in s:
-#         for j in o:
-#             i[1] = i[1][(i[1].find('_')+1):]
-#             j[1] = j[1][(j[1].find('_')+1):]
-
-#             predict_data.append([text,[i[0],j[0],i[1],j[1]],0])
-
-# predict_generator = data_generator(predict_data, 256)
-# res = predict(predict_generator)
-# final_res = []
-
-# for i in range(len(predict_data)):
-
-#     final_res.append([predict_data[i][0],predict_data[i][1],id2label[res[i]]])
-
-# fa.write_json('entry_pointer_ad_res.json',final_res) 
 
